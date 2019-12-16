@@ -1,20 +1,29 @@
 import React, { Fragment } from 'react'
 
+
 const Sushi = (props) => {
+const handleClick=()=>{
+  if(props.budget>=props.oneSushi.price && !props.onHandleEatenSushi(props.oneSushi.id)){
+    props.onAddToEatenSushi(props.oneSushi)
+    props.onRemainBudget(props.oneSushi.price)
+  }
+}
+
+
   return (
     <div className="sushi">
       <div className="plate" 
-           onClick={/* Give me a callback! */ null}>
+           onClick={handleClick}>
         { 
-          /* Tell me if this sushi has been eaten! */ 
-          false ?
+          props.onHandleEatenSushi(props.oneSushi.id)
+          ?
             null
           :
-            <img src={/* Give me an image source! */ } width="100%" />
+            <img src={props.oneSushi.img_url} width="100%" />
         }
       </div>
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+      {props.oneSushi.name} - ${props.oneSushi.price} 
       </h4>
     </div>
   )
